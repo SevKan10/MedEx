@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Khám Bệnh</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Đăng Ký Khám Bệnh</h1>
+        <form id="registrationForm">
+            <input placeholder="Họ" class="input1" type="text" id="firstName" name="firstName" required>
+            <input placeholder="Tên" class="input2" type="text" id="Name" name="Name" required>
+
+            <input placeholder="Địa chỉ" class="input3" type="text" id="address" name="address" required>
+
+            <label for="gender">Giới tính:</label>
+            <div class="gender-options">
+                <label><input type="radio" name="gender" value="male" required> Nam</label>
+                <label><input type="radio" name="gender" value="female" required> Nữ</label>
+                <label><input type="radio" name="gender" value="other" required> Khác</label>
+            </div>
+
+            <label for="department">Chọn Khoa:</label>
+            <select id="department" class="input6" name="department" required>
+                <option value="">-- Chọn Khoa --</option>
+                <option value="general">Khoa Khám Tổng Quát</option>
+                <option value="cardiology">Khoa Tim Mạch</option>
+                <option value="neurology">Khoa Thần Kinh</option>
+                <option value="pediatrics">Khoa Nhi</option>
+                <option value="orthopedics">Khoa Chấn Thương Chỉnh Hình</option>
+            </select>
+
+            <label for="symptoms">Triệu chứng bệnh:</label>
+            <textarea id="symptoms" class="input4" name="symptoms" required></textarea>
+
+            <label for="photo">Chụp hình khuôn mặt:</label>
+            <input class="input5" type="file" id="photo" name="photo" accept="image/*" required>
+
+            <button type="submit">Đăng Ký</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p>Designed by Wellness Sentinels</p>
+    </div>
+</body>
+</html>
