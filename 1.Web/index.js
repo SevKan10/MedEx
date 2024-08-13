@@ -1,3 +1,4 @@
+/* Xử lý tác vụ nút check box và cccd */
 document.addEventListener('DOMContentLoaded', function () {
     const isChildCheckbox = document.getElementById('isChild');
     const cccdInput = document.getElementById('cccd');
@@ -11,3 +12,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+/*===========================================================================================================================*/
