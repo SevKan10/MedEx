@@ -52,9 +52,9 @@ const app = initializeApp(firebaseConfig);
 function registerFunc() {
     // Khởi tạo biến
     var fullName = document.getElementById("fullName").value;
-    var CCCD = document.getElementById("cccd").value;
+    const CCCD = document.getElementById("cccd").value;
     var addressCustomer = document.getElementById("address").value;
-    var phoneNumber = document.getElementById("phone").value;
+    const phoneNumber = document.getElementById("phone").value;
     var emailCustomer = document.getElementById("email").value;
     var dob = document.getElementById("dob").value;
     var gender = document.querySelector('input[name="Giới tính"]:checked').value;
@@ -121,7 +121,7 @@ function sendEmail(emailCustomer, fullName, phoneNumber, CCCD, addressCustomer, 
 /*Gửi GG Sheet*/
 function sendToSheet(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate) 
 {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzVceQYTH3AB48pp4zVUOlEHPM8jzw8ujDk3lAjtwbIqpqa70rd8ceLxeBUg5kbjtNO/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwOkDp1w8_0br3avmqVL8Qb-tz8eTjHMW4Rp_wBK1uwkZ9-JowGQ4cSoWnSEag3ynsu/exec';
     
     const formData = new FormData();
     formData.append('Họ và Tên',        fullName);
