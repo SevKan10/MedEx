@@ -1,0 +1,183 @@
+/* Định dạng cho toàn bộ trang */
+body 
+{
+    font-family: Arial, sans-serif;
+    background: url('image/hinh-nen-powerpoint-y-te-don-gian-mau-xanh-duong-800x600.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+/*===========================================================================================================================*/
+
+.container 
+{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Đặt giới hạn chiều rộng */
+}
+/*===========================================================================================================================*/
+
+h1 {text-align: center; color: #333;}
+/*===========================================================================================================================*/
+
+label {display: block; margin: 10px 0 5px;}
+/*===========================================================================================================================*/
+
+/* Định dạng cho các khung họ và tên nằm chung một hàng */
+.name-group 
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Khoảng cách giữa hai khung */
+}
+/*===========================================================================================================================*/
+
+.name 
+{
+    flex: 1; /* Cho phép các khung chiếm đều không gian */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 40px; /* Bo tròn các góc */
+    background-color: #e0e0e0;
+    font-size: 16px; /* Kích thước chữ cho nội dung */
+    text-align: center; /* Căn giữa nội dung theo chiều ngang */
+    height: 50px; /* Đặt chiều cao để dễ dàng căn giữa theo chiều dọc */
+    box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng thể */
+}
+/*===========================================================================================================================*/
+
+/* Định dạng cho input và textarea */
+input, textarea 
+{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 40px; /* Bo tròn các góc */
+    background-color: #e0e0e0;
+    font-size: 16px; /* Kích thước chữ cho nội dung */
+    text-align: center; /* Căn giữa nội dung theo chiều ngang */
+    height: 50px; /* Đặt chiều cao để dễ dàng căn giữa theo chiều dọc */
+    box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng thể */
+}
+/*===========================================================================================================================*/
+
+.child-checkbox 
+{
+    margin: 10px 0;
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+/*===========================================================================================================================*/
+
+.child-checkbox input[type="checkbox"] 
+{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px; /* Khoảng cách giữa checkbox và văn bản */
+}
+/*===========================================================================================================================*/
+
+.child-checkbox label 
+{
+    font-size: 16px; /* Kích thước chữ */
+    line-height: 15px; /* Căn giữa văn bản theo chiều dọc với checkbox */
+    display: flex; /* Đảm bảo văn bản không bị lệch */
+    align-items: center; /* Căn giữa văn bản theo chiều dọc */
+}
+/*===========================================================================================================================*/
+
+/* Định dạng placeholder */
+input::placeholder, 
+textarea::placeholder 
+{
+    font-size: 18px; /* Tăng kích thước chữ trong placeholder */
+    text-align: center; /* Căn giữa chữ theo chiều ngang */
+    color: #999; /* Màu của placeholder */
+    line-height: 50px; /* Căn giữa placeholder theo chiều dọc */
+}
+/*===========================================================================================================================*/
+
+/* Định dạng cho nút bấm */
+button 
+{
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 40px; /* Bo tròn các góc của nút */
+    cursor: pointer;
+    font-size: 18px; /* Kích thước chữ của nút */
+}
+/*===========================================================================================================================*/
+
+button:hover {background-color: #0056b3;}
+/*===========================================================================================================================*/
+
+/* Định dạng cho các tùy chọn giới tính */
+.gender-options 
+{
+    display: flex;
+    align-items: center; /* Căn giữa các radio buttons theo chiều dọc */
+    justify-content: flex-start; /* Căn các tùy chọn gần lại phía đầu */
+    margin-bottom: 10px; /* Khoảng cách dưới cùng */
+}
+/*===========================================================================================================================*/
+
+.gender-options label 
+{
+    font-size: 16px; /* Kích thước phông chữ */
+    margin-right: 10px; /* Khoảng cách giữa các nhãn */
+    display: flex;
+    align-items: center; /* Căn giữa radio button và văn bản theo chiều dọc */
+}
+/*===========================================================================================================================*/
+
+.gender-options input[type="radio"] 
+{
+    width: 15px; /* Kích thước radio button */
+    height: 15px; /* Kích thước radio button */
+    margin-right: 5px; /* Khoảng cách giữa radio button và nhãn */
+    cursor: pointer; /* Thay đổi con trỏ khi di chuột qua radio button */
+}
+/*===========================================================================================================================*/
+
+/* Định dạng file input */
+.photo 
+{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    background-color: #e0e0e0;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+/*===========================================================================================================================*/
+
+.photo::file-selector-button {display: none; /* Ẩn nút mặc định của trình duyệt */}
+/*===========================================================================================================================*/
+
+/* Định dạng cho footer */
+.footer 
+{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(112, 203, 245);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+/*===========================================================================================================================*/
