@@ -10,6 +10,7 @@ body
     height: 100vh;
     margin: 0;
 }
+
 /*===========================================================================================================================*/
 
 .container 
@@ -20,22 +21,22 @@ body
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px; /* Đặt giới hạn chiều rộng */
+    box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng thể */
 }
+
 /*===========================================================================================================================*/
 
 h1 {text-align: center; color: #333;}
+
 /*===========================================================================================================================*/
 
 label {display: block; margin: 10px 0 5px;}
+
 /*===========================================================================================================================*/
 
 /* Định dạng cho các khung họ và tên nằm chung một hàng */
-.name-group 
-{
-    display: flex;
-    justify-content: space-between;
-    gap: 10px; /* Khoảng cách giữa hai khung */
-}
+.name-group {display: flex; flex-wrap: wrap; gap: 10px;}
+
 /*===========================================================================================================================*/
 
 .name 
@@ -50,6 +51,7 @@ label {display: block; margin: 10px 0 5px;}
     height: 50px; /* Đặt chiều cao để dễ dàng căn giữa theo chiều dọc */
     box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng thể */
 }
+
 /*===========================================================================================================================*/
 
 /* Định dạng cho input và textarea */
@@ -66,22 +68,16 @@ input, textarea
     height: 50px; /* Đặt chiều cao để dễ dàng căn giữa theo chiều dọc */
     box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước tổng thể */
 }
+
 /*===========================================================================================================================*/
 
-.child-checkbox 
-{
-    margin: 10px 0;
-    display: flex;
-    align-items: center; /* Căn giữa theo chiều dọc */
+.child-checkbox {margin: 10px 0; display: flex; align-items: center;
 }
+
 /*===========================================================================================================================*/
 
-.child-checkbox input[type="checkbox"] 
-{
-    width: 15px;
-    height: 15px;
-    margin-right: 10px; /* Khoảng cách giữa checkbox và văn bản */
-}
+.child-checkbox input[type="checkbox"] {width: 15px; height: 15px; margin-right: 10px;}
+
 /*===========================================================================================================================*/
 
 .child-checkbox label 
@@ -91,6 +87,7 @@ input, textarea
     display: flex; /* Đảm bảo văn bản không bị lệch */
     align-items: center; /* Căn giữa văn bản theo chiều dọc */
 }
+
 /*===========================================================================================================================*/
 
 /* Định dạng placeholder */
@@ -102,6 +99,7 @@ textarea::placeholder
     color: #999; /* Màu của placeholder */
     line-height: 50px; /* Căn giữa placeholder theo chiều dọc */
 }
+
 /*===========================================================================================================================*/
 
 /* Định dạng cho nút bấm */
@@ -116,19 +114,23 @@ button
     cursor: pointer;
     font-size: 18px; /* Kích thước chữ của nút */
 }
+
 /*===========================================================================================================================*/
 
 button:hover {background-color: #0056b3;}
+
 /*===========================================================================================================================*/
 
 /* Định dạng cho các tùy chọn giới tính */
 .gender-options 
 {
     display: flex;
+    flex-wrap: wrap; /* Cho phép các tùy chọn xuống hàng nếu cần */
     align-items: center; /* Căn giữa các radio buttons theo chiều dọc */
     justify-content: flex-start; /* Căn các tùy chọn gần lại phía đầu */
     margin-bottom: 10px; /* Khoảng cách dưới cùng */
 }
+
 /*===========================================================================================================================*/
 
 .gender-options label 
@@ -138,6 +140,7 @@ button:hover {background-color: #0056b3;}
     display: flex;
     align-items: center; /* Căn giữa radio button và văn bản theo chiều dọc */
 }
+
 /*===========================================================================================================================*/
 
 .gender-options input[type="radio"] 
@@ -147,6 +150,7 @@ button:hover {background-color: #0056b3;}
     margin-right: 5px; /* Khoảng cách giữa radio button và nhãn */
     cursor: pointer; /* Thay đổi con trỏ khi di chuột qua radio button */
 }
+
 /*===========================================================================================================================*/
 
 /* Định dạng file input */
@@ -163,9 +167,11 @@ button:hover {background-color: #0056b3;}
     cursor: pointer;
     box-sizing: border-box;
 }
+
 /*===========================================================================================================================*/
 
 .photo::file-selector-button {display: none; /* Ẩn nút mặc định của trình duyệt */}
+
 /*===========================================================================================================================*/
 
 /* Định dạng cho footer */
@@ -180,4 +186,27 @@ button:hover {background-color: #0056b3;}
     text-align: center;
     padding: 10px;
 }
+
 /*===========================================================================================================================*/
+
+/* Responsive Styles */
+@media (max-width: 768px) 
+{
+    .name-group {flex-direction: column; /* Xếp các khung họ và tên theo chiều dọc trên màn hình nhỏ */ gap: 10px;}
+
+    .name {width: 100%; /* Đảm bảo các khung họ và tên chiếm toàn bộ chiều rộng trên màn hình nhỏ */}
+
+    input, textarea {height: auto; /* Điều chỉnh chiều cao input và textarea */}
+    
+    .gender-options {flex-direction: column; /* Xếp các tùy chọn giới tính theo chiều dọc trên màn hình nhỏ */}
+
+    .gender-options label {margin-right: 0; /* Loại bỏ khoảng cách giữa các nhãn trên màn hình nhỏ */ margin-bottom: 10px; /* Thêm khoảng cách dưới các nhãn trên màn hình nhỏ */}
+}
+
+@media (max-width: 480px) {
+    .container {padding: 10px; /* Giảm padding của container trên màn hình nhỏ hơn */ max-width: 100%; /* Đảm bảo container chiếm toàn bộ chiều rộng */}
+    
+    input, textarea {font-size: 14px; /* Giảm kích thước chữ trong input và textarea */}
+
+    button {font-size: 16px; /* Giảm kích thước chữ của nút */}
+}
