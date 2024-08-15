@@ -32,6 +32,7 @@ async function registerFunc()
     const symptomsCustomer = document.getElementById("symptoms").value;
     const examDate = document.getElementById("ed").value;
     const photoFile = document.getElementById("photo").files[0]; // Lấy tệp đầu tiên (trong trường hợp chỉ chọn một tệp)
+    const uniqueID = new Date().getTime(); // Tạo ID dựa trên thời gian hiện tại
 
     if (CCCD === "") {CCCD = "Là trẻ em (không có)";}
 
@@ -50,7 +51,7 @@ async function registerFunc()
 
     // Đọc hình ảnh và tải lên Firebase
     const imageDataUrl = await readFile(photoFile);
-    await saveToFireBase(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, photoFile);
+    await saveToFireBase(uniqueID, fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, photoFile);
     sendToSheet(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, imageDataUrl);
     sendEmail(emailCustomer, fullName, phoneNumber, CCCD, addressCustomer, symptomsCustomer, examDate);
 }
@@ -128,15 +129,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
-async function saveToFireBase(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, photoFile) {
+async function saveToFireBase(uniqueID, fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, photoFile) 
+{
     const storage = getStorage();
-    const imageRef = storageRef(storage, 'images/' + fullName);
+    const imageRef = storageRef(storage, 'images/' + uniqueID);
 
     try {
         const snapshot = await uploadBytes(imageRef, photoFile);
         console.log('Image uploaded successfully');
         const downloadURL = await getDownloadURL(snapshot.ref);
-        await set(ref(db, 'user/' + fullName), {
+        await set(ref(db, 'user/' + uniqueID), 
+        {
+            Name: fullName,
             ID_CCCD: CCCD,
             Address: addressCustomer,
             Phone: phoneNumber,
@@ -147,9 +151,7 @@ async function saveToFireBase(fullName, CCCD, addressCustomer, phoneNumber, emai
             Exam_Date: examDate,
             ImageURL: downloadURL
         });
-        console.log("Dữ liệu đã được lưu thành công!");
-    } catch (error) {
-        console.error("Lỗi tải lên hình ảnh hoặc lưu dữ liệu: ", error);
-    }
+        console.log("Send success");
+    } catch (error) {console.error("Send fail", error);}
 }
 /*===========================================================================================================================*/
