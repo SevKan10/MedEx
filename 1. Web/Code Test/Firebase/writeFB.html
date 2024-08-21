@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lưu Dữ Liệu vào Firebase</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+
+</head>
+<body>
+    <h1>Lưu Dữ Liệu vào Firebase</h1>
+    <form>
+        <label for="txtName">Tên cây:</label>
+        <input type="text" id="txtName" name="name"><br>
+
+        <label for="chAcpt">Chấp nhận:</label>
+        <input type="checkbox" id="chAcpt" name="accept"><br>
+
+        <label for="txtTemp">Nhiệt độ:</label>
+        <input type="text" id="txtTemp" name="temp"><br>
+
+        <label for="txtHum">Độ ẩm:</label>
+        <input type="text" id="txtHum" name="hum"><br>
+
+        <label for="tray">Khay:</label>
+        <select id="tray" name="tray">
+            <option value="1">Khay 1</option>
+            <option value="2">Khay 2</option>
+            <option value="3">Khay 3</option>
+            <option value="4">Khay 4</option>
+        </select><br>
+
+        <button type="button" onclick="saveToFirebase()">Lưu</button>
+    </form>
+
+    <script src="write.js"></script>
+</body>
+</html>

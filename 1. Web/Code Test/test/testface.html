@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Khám Bệnh</title>
+    <style>
+        /* CSS cơ bản như đã đề cập trước đây */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        input, select, textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            display: none;
+            margin-top: 15px;
+        }
+
+        #output img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Đăng Ký Khám Bệnh</h1>
+        <form id="form">
+            <label for="name">Họ và tên:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="image">Chọn hình ảnh chân dung:</label>
+            <input type="file" id="image" accept="image/*" required>
+
+            <button type="submit">Đăng Ký</button>
+        </form>
+        <div id="output">
+            <h2>Ảnh đã xử lý:</h2>
+            <img id="face-image" src="">
+        </div>
+    </div>
+
+    <!-- Include MediaPipe Face Detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+
+    <script>
+        const form = document.getElementById('form');
+        const imageInput = document.getElementById('image');
+        const output = document.getElementById('output');
+        const faceImage = document.getElementById('face-image');
+
+        const faceDetection = new FaceDetection.FaceDetection({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`
+        });
+
+        faceDetection.setOptions({
+            model: 'short',
+            minDetectionConfidence: 0.5
+        });
+
+        faceDetection.onResults(onResults);
+
+        async function onResults(results) {
+            if (results.detections.length > 0) {
+                const detection = results.detections[0];
+                const boundingBox = detection.boundingBox;
+                const image = new Image();
+                image.src = URL.createObjectURL(imageInput.files[0]);
+                image.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = boundingBox.width * image.width;
+                    canvas.height = boundingBox.height * image.height;
+                    ctx.drawImage(
+                        image,
+                        boundingBox.xCenter * image.width - (boundingBox.width * image.width) / 2,
+                        boundingBox.yCenter * image.height - (boundingBox.height * image.height) / 2,
+                        boundingBox.width * image.width,
+                        boundingBox.height * image.height,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+                    faceImage.src = canvas.toDataURL();
+                    output.style.display = 'block';
+                };
+            }
+        }
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const file = imageInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const img = new Image();
+                    img.src = reader.result;
+                    img.onload = async () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        await faceDetection.send({image: img});
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
