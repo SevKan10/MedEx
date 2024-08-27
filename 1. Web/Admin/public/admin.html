@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="images/admin.png">
+    <link rel="stylesheet" href="css/admin.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Quản Lý Bệnh Nhân</h1>
+            <h1><span id="doctorName"></span></h1> <!-- Tên bác sĩ -->
+            <button id="logoutButton">Đăng Xuất</button>
+        </header>
+        <main>
+            <section class="admin-info">
+                <h2>Thông Tin Quản Lý</h2>
+                <div id="userData">
+                    <table id="dataTable" border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Họ và Tên</th>
+                                <th>CCCD</th>
+                                <th>Địa chỉ</th>
+                                <th>SĐT</th>
+                                <th>Email</th>
+                                <th>Ngày sinh</th>
+                                <th>Giới tính</th>
+                                <th>Triệu chứng</th>
+                                <th>Ngày Khám</th>
+                                <th>Ảnh</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataContainer">
+                            <!-- Dữ liệu người dùng sẽ được hiển thị ở đây -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
