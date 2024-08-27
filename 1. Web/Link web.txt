@@ -1,2 +1,5 @@
 https://medex-7ff53.web.app/
 https://medex-7ff53.firebaseapp.com/
+
+https://medical-examiner-40e4d.web.app/
+https://medical-examiner-40e4d.firebaseapp.com/
