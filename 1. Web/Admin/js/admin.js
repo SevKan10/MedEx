@@ -18,13 +18,13 @@ const firebaseConfig =
 
 const firebaseConfigDoctor = 
 {
-    apiKey: "AIzaSyApDDkYYnspLURziqncgeIVSNuzRTRMPj8",
-    authDomain: "data-doctors.firebaseapp.com",
-    databaseURL: "https://data-doctors-default-rtdb.asia-southeast1.firebasedatabase.app/",
-    projectId: "data-doctors",
-    storageBucket: "data-doctors.appspot.com",
-    messagingSenderId: "219281200799",
-    appId: "1:219281200799:web:270f0aa631852dbcd7f4aa"
+    apiKey: "AIzaSyD_1V-oo7_fAXN2Iu1O-M_-X3qLaGLXUHo",
+    authDomain: "doctors-e0601.firebaseapp.com",
+    databaseURL: "https://doctors-e0601-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    projectId: "doctors-e0601",
+    storageBucket: "doctors-e0601.appspot.com",
+    messagingSenderId: "958721343640",
+    appId: "1:958721343640:web:81a06f157afc58fe84d0ed"
 };
 /*===========================================================================================================================*/
 
