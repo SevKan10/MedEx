@@ -100,7 +100,6 @@ void loop(){
  delay(5000);
  for(int i=255; i > -1; i--){
   dilui(i,i);
-  Serialpip.println(i);
   delay(50);
  }
  delay(5000);

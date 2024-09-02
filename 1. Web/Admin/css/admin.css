@@ -62,7 +62,7 @@ header h1 {
 }
 
 .confirm-button {
-    background-color: #e74c3c;
+    background-color: lightblue;
     border: none;
     color: white;
     padding: 5px 10px;
@@ -82,4 +82,17 @@ header h1 {
 .confirmation-name {
     font-size: 0.9em;
     color: #333;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
 }
