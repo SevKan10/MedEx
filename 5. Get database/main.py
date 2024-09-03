@@ -4,9 +4,9 @@ import json
 import os
 
 # Khởi tạo Firebase
-cred = credentials.Certificate('medex.json')
+cred = credentials.Certificate('medical-examiner.json')
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://medex-7ff53-default-rtdb.asia-southeast1.firebasedatabase.app'
+    'databaseURL': 'https://medical-examiner-40e4d-default-rtdb.asia-southeast1.firebasedatabase.app/'
 })
 
 # Đường dẫn tới file lưu trữ ID người dùng đã lấy về
