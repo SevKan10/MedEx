@@ -1,24 +1,21 @@
-import firebase_admin
-from firebase_admin import credentials, storage
+import pyrebase
+config ={
+  "apiKey": "AIzaSyDoWySbs3R0yKWsRTgRK54pLgudr8Srcfo",
+  "authDomain": "medical-examiner-40e4d.firebaseapp.com",
+  "databaseURL": "https://medical-examiner-40e4d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "projectId": "medical-examiner-40e4d",
+  "storageBucket": "medical-examiner-40e4d.appspot.com",
+  "messagingSenderId": "592499333547",
+  "appId": "1:592499333547:web:a830daa4140cf1ca515aee"
+}
 
-# Khởi tạo Firebase với khóa JSON của tài khoản dịch vụ
-cred = credentials.Certificate('medex.json')
-firebase_admin.initialize_app(cred, {
-    'storageBucket': 'medex-7ff53.appspot.com'
-})
+firebase = pyrebase.initialize_app(config)
+storage = firebase.storage()
+localpath="" 
+cloudpath="images/1724738748252.png"
 
-def download_file(file_path, destination_file_name):
-    bucket = storage.bucket()
-    blob = bucket.blob(file_path)
-    
-    try:
-        blob.download_to_filename(destination_file_name)
-        print(f'File {file_path} downloaded to {destination_file_name}.')
-    except Exception as e:
-        print(f'Error downloading file: {e}')
-
-# Tải ảnh từ Firebase Storage
-file_path = 'images/1724344077215.jpg'  # Đường dẫn tệp trong Firebase Storage
-destination_file_name = '1724344077215.jpg'  # Đường dẫn tệp lưu trữ cục bộ
-
-download_file(file_path, destination_file_name)
+try:
+    storage.child(cloudpath).download(localpath,filename="1724738748252.png")
+    print("Successfull")
+except Exception as e: 
+    print(f"An error occurred: {e}")
