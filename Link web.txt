@@ -1,2 +1,7 @@
+ĐĂNG KÝ
 https://medex-7ff53.web.app/
 https://medex-7ff53.firebaseapp.com/
+
+ADMIN
+https://doctors-e0601.web.app/
+https://doctors-e0601.firebaseapp.com/
