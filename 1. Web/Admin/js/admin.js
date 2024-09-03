@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+import { getDatabase, ref, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+import { getStorage, ref as storageRef, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
 
 /* Firebase Config */
 const firebaseConfig = {
@@ -162,23 +162,76 @@ async function updateFirebaseEntry(id, doctorName) {
 }
 
 /* Handle Delete */
-function handleDelete(event) {
+async function handleDelete(event) {
+    // Fetch the data-id attribute from the delete button
     const button = event.target;
-    const uniqueID = button.getAttribute('data-id');
+    const id = button.getAttribute('data-id');
 
-    if (confirm('Bạn có chắc chắn muốn xóa mục này không?')) {
-        deleteFirebaseEntry(uniqueID);
+    // Show confirmation dialog
+    const confirmed = confirm('Bạn có chắc chắn muốn xóa mục này không?');
+
+    if (confirmed) {
+        try {
+            // Fetch the data for the specific user
+            const userRef = ref(dbUser, 'user/' + id);
+            const snapshot = await get(userRef);  // Use 'get' to fetch user data
+            const userData = snapshot.val();
+
+            if (userData && userData.ImageURL) {
+                // Create a reference to the file to delete
+                const imageRef = storageRef(storage, userData.ImageURL);
+
+                // Delete the file from Firebase Storage
+                await deleteObject(imageRef);
+                console.log('Hình ảnh đã được xóa thành công');
+            }
+
+            // Remove the data from Firebase Realtime Database
+            await remove(userRef);
+            console.log('Xóa dữ liệu thành công');
+            alert('Dữ liệu đã được xóa thành công.');
+            
+            // Refresh data after deletion
+            fetchAndDisplayData();
+        } catch (error) {
+            console.error('Lỗi khi xóa dữ liệu hoặc hình ảnh:', error);
+            alert('Lỗi khi xóa dữ liệu hoặc hình ảnh. Vui lòng kiểm tra lại.');
+        }
+    } else {
+        console.log('Xóa bị hủy');
     }
 }
 
 /* Delete Firebase Entry */
 async function deleteFirebaseEntry(id) {
-    try {
-        await remove(ref(dbUser, 'user/' + id));
-        console.log('Xóa thành công');
-        fetchAndDisplayData(); // Refresh data after deletion
-    } catch (error) {
-        console.error('Lỗi khi xóa dữ liệu:', error);
+    const button = event.target;
+    const uniqueID = button.getAttribute('data-id');
+
+    if (confirm('Bạn có chắc chắn muốn xóa mục này không?')) {
+        try {
+            // Fetch the data for the specific user
+            const userRef = ref(dbUser, 'user/' + uniqueID);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val();
+
+            if (userData && userData.ImageURL) {
+                // Create a reference to the file to delete
+                const imageRef = storageRef(storage, userData.ImageURL);
+
+                // Delete the file from Firebase Storage
+                await deleteObject(imageRef);
+                console.log('Hình ảnh đã được xóa thành công');
+            }
+
+            // Remove the data from Firebase Realtime Database
+            await remove(userRef);
+            console.log('Xóa dữ liệu thành công');
+            
+            // Refresh data after deletion
+            fetchAndDisplayData();
+        } catch (error) {
+            console.error('Lỗi khi xóa dữ liệu hoặc hình ảnh:', error);
+        }
     }
 }
 
@@ -193,6 +246,10 @@ function logout() {
 }
 
 document.getElementById('logoutButton').addEventListener('click', logout);
+
+window.onload = () => {
+    fetchAndDisplayData();
+};
 
 window.onload = () => {
     fetchAndDisplayData();
