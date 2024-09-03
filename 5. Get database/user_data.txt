@@ -1,48 +1,14 @@
-User ID: 1724344077215
-Address: giai
-Birthday: 2024-08-22
+User ID: 1724738748252
+Address: Thới Giai, Giai Xuân, Phong Điền, Cần Thơ
+Birthday: 2007-07-10
+Confirmed: True
+Confirmed_By: SevKan
 Email: khangkhuu10727@gmail.com
-Exam_Date: 2024-08-22
+Exam_Date: 0101-10-10
 Gender: Nam
-User ID: 1724344077215
-Address: giai
-Birthday: 2024-08-22
-Email: khangkhuu10727@gmail.com
-Exam_Date: 2024-08-22
-Gender: Nam
-User ID: 1724344077215
-Address: giai
-Birthday: 2024-08-22
-Email: khangkhuu10727@gmail.com
-Exam_Date: 2024-08-22
-Gender: Nam
-ID_CCCD: Là trẻ em (không có)
-ImageURL: https://firebasestorage.googleapis.com/v0/b/medex-7ff53.appspot.com/o/images%2F1724344077215?alt=media&token=9bc74a2b-62c0-4372-af2a-a395d0f97eba
-Name: Khưu Khang2
-Phone: 086664446868
-Symptoms: jjjjjnj
-
-User ID: 1724346400901
-Address: giai
-Birthday: 2024-08-22
-Email: khangkhuu10727@gmail.com
-Exam_Date: 2024-08-22
-Gender: Nam
-ID_CCCD: Là trẻ em (không có)
-ImageURL: https://firebasestorage.googleapis.com/v0/b/medex-7ff53.appspot.com/o/images%2F1724346400901?alt=media&token=0375fc7c-2c6d-4ebb-85bc-0262ea32d949
-Name: Khưu Khang2
-Phone: 086664446868
-Symptoms: jjjjjnj
-
-User ID: 1724346414682
-Address: giai
-Birthday: 2024-08-22
-Email: khangkhuu10727@gmail.com
-Exam_Date: 2024-08-22
-Gender: Nam
-ID_CCCD: Là trẻ em (không có)
-ImageURL: https://firebasestorage.googleapis.com/v0/b/medex-7ff53.appspot.com/o/images%2F1724346414682?alt=media&token=e357c0f9-b0a0-4dce-a7d1-b931a4c3dff5
-Name: Khưu Khang2
-Phone: 086664446868
-Symptoms: jjjjjnj
+ID_CCCD: 44444447
+ImageURL: https://firebasestorage.googleapis.com/v0/b/medical-examiner-40e4d.appspot.com/o/images%2F1724738748252?alt=media&token=cf87f36f-2742-46b6-9507-dd0ba999e418
+Name: Khưu Triều Minh Khang
+Phone: 0866207887
+Symptoms: 010101
 
