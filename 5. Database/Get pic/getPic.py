@@ -11,11 +11,11 @@ config ={
 
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
+user_id= "1725383582277"
 localpath="" 
-cloudpath="images/1724738748252.png"
-
+cloudpath=f"images/{user_id}"
 try:
-    storage.child(cloudpath).download(localpath,filename="1724738748252.png")
+    storage.child(cloudpath).download(localpath,filename='Khang2.png')
     print("Successfull")
 except Exception as e: 
     print(f"An error occurred: {e}")

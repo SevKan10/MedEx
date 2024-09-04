@@ -4,15 +4,15 @@ import json
 import os
 
 # Khởi tạo Firebase
-cred = credentials.Certificate('medical-examiner.json')
+cred = credentials.Certificate('test/medical-examiner.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://medical-examiner-40e4d-default-rtdb.asia-southeast1.firebasedatabase.app/'
 })
 
 # Đường dẫn tới file lưu trữ ID người dùng đã lấy về
-fetched_users_file = 'fetched_users.json'
+fetched_users_file = 'test/fetched_users.json'
 # Đường dẫn tới file txt để lưu dữ liệu người dùng
-output_file = 'user_data.txt'
+output_file = 'test/user_data.txt'
 
 # Tải các ID người dùng đã lấy về từ file
 if os.path.exists(fetched_users_file):
@@ -28,9 +28,10 @@ def save_fetched_users():
 # Hàm ghi dữ liệu người dùng vào file txt
 def write_user_data_to_file(user_id, user_data):
     with open(output_file, 'a', encoding='utf-8') as file:
-        file.write(f"User ID: {user_id}\n")
-        for key, value in user_data.items():
-            file.write(f"{key}: {value}\n")
+        file.write(f"{user_id}\n") #ID
+        file.write(f"{user_data.get('Confirmed', 'N/A')}\n") #Xác nhận
+        file.write(f"{user_data.get('Confirmed_By', 'N/A')}\n") #Người xác nhận
+        file.write(f"{user_data.get('Name', 'N/A')}\n") #Tên
         file.write("\n")
 
 # Hàm lấy người dùng mới
@@ -43,12 +44,19 @@ def fetch_new_users():
         new_users = {}
         for user_id, user_data in users.items():
             if user_id not in fetched_users:
+                # Chỉ lưu trữ các trường cần thiết
+                filtered_data = {
+                    'Confirmed': user_data.get('Confirmed'),
+                    'Confirmed_By': user_data.get('Confirmed_By'),
+                    'Name': user_data.get('Name')
+                }
+
                 # Thêm dữ liệu của người dùng mới vào dictionary new_users
-                new_users[user_id] = user_data
+                new_users[user_id] = filtered_data
                 fetched_users.append(user_id)
 
                 # Ghi dữ liệu người dùng vào file txt
-                write_user_data_to_file(user_id, user_data)
+                write_user_data_to_file(user_id, filtered_data)
 
         # Lưu lại các ID người dùng đã lấy về
         save_fetched_users()
