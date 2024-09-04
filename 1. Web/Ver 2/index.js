@@ -49,7 +49,7 @@ async function registerFunc()
     // Đọc hình ảnh và tải lên Firebase
     const imageDataUrl = await readFile(photoFile);
     await saveToFireBase(uniqueID, fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, photoFile);
-    sendToSheet(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, imageDataUrl);
+    // sendToSheet(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate, imageDataUrl);
     sendEmail(emailCustomer, fullName, phoneNumber, CCCD, addressCustomer, symptomsCustomer, examDate);
 }
 /*===========================================================================================================================*/
@@ -87,26 +87,26 @@ function sendEmail(emailCustomer, fullName, phoneNumber, CCCD, addressCustomer, 
 /*===========================================================================================================================*/
 
 /*Gửi GG Sheet*/
-function sendToSheet(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate) 
-{
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwOkDp1w8_0br3avmqVL8Qb-tz8eTjHMW4Rp_wBK1uwkZ9-JowGQ4cSoWnSEag3ynsu/exec';
+// function sendToSheet(fullName, CCCD, addressCustomer, phoneNumber, emailCustomer, dob, gender, symptomsCustomer, examDate) 
+// {
+//     const scriptURL = 'https://script.google.com/macros/s/AKfycbwOkDp1w8_0br3avmqVL8Qb-tz8eTjHMW4Rp_wBK1uwkZ9-JowGQ4cSoWnSEag3ynsu/exec';
     
-    const formData = new FormData();
-    formData.append('Họ và Tên',        fullName);
-    formData.append('Số CCCD',          CCCD);
-    formData.append('Địa chỉ',          addressCustomer);
-    formData.append('Điện thoại',       phoneNumber);
-    formData.append('Email',            emailCustomer);
-    formData.append('Ngày sinh',        dob);
-    formData.append('Giới tính',        gender);
-    formData.append('Triệu chứng bệnh', symptomsCustomer);
-    formData.append('Ngày Khám',        examDate);
+//     const formData = new FormData();
+//     formData.append('Họ và Tên',        fullName);
+//     formData.append('Số CCCD',          CCCD);
+//     formData.append('Địa chỉ',          addressCustomer);
+//     formData.append('Điện thoại',       phoneNumber);
+//     formData.append('Email',            emailCustomer);
+//     formData.append('Ngày sinh',        dob);
+//     formData.append('Giới tính',        gender);
+//     formData.append('Triệu chứng bệnh', symptomsCustomer);
+//     formData.append('Ngày Khám',        examDate);
 
-    fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response =>{if (response.ok) {console.log("Send success");}
-        else {console.log("Send fail");}})
-        .catch(error => console.error('error!', error.message));
-}
+//     fetch(scriptURL, { method: 'POST', body: formData })
+//         .then(response =>{if (response.ok) {console.log("Send success");}
+//         else {console.log("Send fail");}})
+//         .catch(error => console.error('error!', error.message));
+// }
 /*===========================================================================================================================*/
 
 /*Kết nối cơ sở dữ liệu Firebase bằng SDK*/ 

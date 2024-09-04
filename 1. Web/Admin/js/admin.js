@@ -2,9 +2,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/fireba
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import { getDatabase, ref, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 import { getStorage, ref as storageRef, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+/*===========================================================================================================================*/
 
 /* Firebase Config */
-const firebaseConfig = {
+const firebaseConfig = 
+{
     apiKey: "AIzaSyDoWySbs3R0yKWsRTgRK54pLgudr8Srcfo",
     authDomain: "medical-examiner-40e4d.firebaseapp.com",
     databaseURL: "https://medical-examiner-40e4d-default-rtdb.asia-southeast1.firebasedatabase.app/",
@@ -13,8 +15,10 @@ const firebaseConfig = {
     messagingSenderId: "592499333547",
     appId: "1:592499333547:web:a830daa4140cf1ca515aee"
 };
+/*===========================================================================================================================*/
 
-const firebaseConfigDoctor = {
+const firebaseConfigDoctor = 
+{
     apiKey: "AIzaSyD_1V-oo7_fAXN2Iu1O-M_-X3qLaGLXUHo",
     authDomain: "doctors-e0601.firebaseapp.com",
     databaseURL: "https://doctors-e0601-default-rtdb.asia-southeast1.firebasedatabase.app/",
@@ -23,6 +27,7 @@ const firebaseConfigDoctor = {
     messagingSenderId: "958721343640",
     appId: "1:958721343640:web:81a06f157afc58fe84d0ed"
 };
+/*===========================================================================================================================*/
 
 /* Firebase Initialization */
 const app = initializeApp(firebaseConfig);
@@ -34,16 +39,15 @@ const appDoctor = initializeApp(firebaseConfigDoctor, "doctor");
 const dbDoctor = getDatabase(appDoctor);
 
 const email = localStorage.getItem('userEmail');
+/*===========================================================================================================================*/
 
-if (email) {
-    displayDoctorName(email);
-    handleConfirm(event, email);
-} else {
-    window.location.href = 'login.html';
-}
+if (email) {displayDoctorName(email); handleConfirm(event, email);} 
+else {window.location.href = 'index.html';}
+/*===========================================================================================================================*/
 
 /* Display Doctor Name */
-function displayDoctorName(email) {
+function displayDoctorName(email) 
+{
     const doctorRef = ref(dbDoctor, 'doctors/' + email.replace('.', ','));
 
     onValue(doctorRef, (snapshot) => {
@@ -56,9 +60,11 @@ function displayDoctorName(email) {
         }
     });
 }
+/*===========================================================================================================================*/
 
 /* Fetch and Display Data */
-function fetchAndDisplayData() {
+function fetchAndDisplayData() 
+{
     const dataRef = ref(dbUser, 'user/');
 
     onValue(dataRef, (snapshot) => {
@@ -123,6 +129,7 @@ function fetchAndDisplayData() {
         }
     });
 }
+/*===========================================================================================================================*/
 
 /* Handle Confirmation */
 function handleConfirm(event = null, email = null) {
@@ -146,6 +153,7 @@ function handleConfirm(event = null, email = null) {
         }, { onlyOnce: true });
     }
 }
+/*===========================================================================================================================*/
 
 /* Update Firebase Entry */
 async function updateFirebaseEntry(id, doctorName) {
@@ -160,6 +168,7 @@ async function updateFirebaseEntry(id, doctorName) {
         console.error('Update failed', error);
     }
 }
+/*===========================================================================================================================*/
 
 /* Handle Delete */
 async function handleDelete(event) {
@@ -201,6 +210,7 @@ async function handleDelete(event) {
         console.log('Xóa bị hủy');
     }
 }
+/*===========================================================================================================================*/
 
 /* Delete Firebase Entry */
 async function deleteFirebaseEntry(id) {
@@ -234,12 +244,14 @@ async function deleteFirebaseEntry(id) {
         }
     }
 }
+/*===========================================================================================================================*/
 
 /* Logout Function */
-function logout() {
+function logout() 
+{
     signOut(auth).then(() => {
         localStorage.removeItem('userEmail');
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }).catch((error) => {
         console.error('Lỗi khi đăng xuất:', error);
     });
@@ -247,10 +259,4 @@ function logout() {
 
 document.getElementById('logoutButton').addEventListener('click', logout);
 
-window.onload = () => {
-    fetchAndDisplayData();
-};
-
-window.onload = () => {
-    fetchAndDisplayData();
-};
+window.onload = () => { fetchAndDisplayData();};
