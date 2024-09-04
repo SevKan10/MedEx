@@ -3,6 +3,9 @@ from firebase_admin import credentials, db
 import json
 import os
 
+Temp = 80
+Heart= 80
+
 # Khởi tạo Firebase
 cred = credentials.Certificate('medical-examiner.json')
 firebase_admin.initialize_app(cred, {
@@ -33,8 +36,8 @@ else:
 def push_temp_and_heart_to_firebase(user_id):
     ref = db.reference(f'user/{user_id}')
     ref.update({
-        'Temp': 80,
-        'Heart': 80
+        'Temp': Temp,
+        'Heart': Heart
     })
     print(f"Đã cập nhật dữ liệu cố định cho User ID: {user_id}")
 
