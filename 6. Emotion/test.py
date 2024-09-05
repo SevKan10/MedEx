@@ -12,8 +12,6 @@ pygame.display.set_caption("Emotion Display")
 images = {
     'mo_mat': pygame.image.load('images/mo_mat.png'),
     'nham_mat': pygame.image.load('images/nham_mat.png'),
-    'mo_phai': pygame.image.load('images/mo_phai.png'),
-    'mo_trai': pygame.image.load('images/mo_trai.png'),
     'nheo_mat': pygame.image.load('images/nheo_mat.png')
 }
 
@@ -24,13 +22,20 @@ def display_image(image_key, delay=2):
     pygame.display.flip()
     time.sleep(delay)
 
+def blink_eye2():
+    """ Hiệu ứng chớp mắt hai lần liên tục """
+    display_image('mo_mat')
+    time.sleep(0.5)
+    display_image('nham_mat', 0.1)
+    display_image('mo_mat', 0.5)
+    display_image('nham_mat', 0.1)
+    display_image('mo_mat', 0.5)
+    
 def blink_eye():
     """ Hiệu ứng chớp mắt """
     display_image('mo_mat')
     time.sleep(0.5)
-    display_image('mo_phai', 0.1)
     display_image('nham_mat', 0.1)
-    display_image('mo_trai', 0.1)
     display_image('mo_mat', 1)
 
 def tuc_cute_face():
@@ -73,7 +78,7 @@ def loop():
                 return
 
         # Chọn ngẫu nhiên một trong các hình ảnh
-        random_choice = random.choice([blink_eye, tuc_cute_face, khoc_face, cuoi_face, the_rock_face])
+        random_choice = random.choice([blink_eye2, blink_eye, tuc_cute_face, khoc_face, cuoi_face, the_rock_face])
         random_choice()
         time.sleep(1)  
 
