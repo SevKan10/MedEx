@@ -73,24 +73,35 @@ function fetchAndDisplayData()
         dataContainer.innerHTML = '';
 
         if (data) {
+            // Sắp xếp dữ liệu trước theo STT và nếu STT giống nhau, tiếp tục sắp xếp theo ID_CCCD và ưu tiên trẻ em
             const sortedData = Object.entries(data).sort(([keyA, valueA], [keyB, valueB]) => {
+                const sttA = parseInt(valueA.STT) || 0; // Nếu không có STT, giá trị mặc định là 0
+                const sttB = parseInt(valueB.STT) || 0;
+
+                // Sắp xếp STT từ bé đến lớn
+                if (sttA !== sttB) {
+                    return sttA - sttB;
+                }
+
+                // Nếu STT giống nhau hoặc không có STT, tiếp tục sắp xếp theo ID_CCCD và ưu tiên trẻ em
                 const idCCCD_A = valueA.ID_CCCD || '';
                 const idCCCD_B = valueB.ID_CCCD || '';
                 const isChildA = idCCCD_A.toLowerCase().includes('trẻ em');
                 const isChildB = idCCCD_B.toLowerCase().includes('trẻ em');
 
                 if (isChildA && !isChildB) {
-                    return -1;
+                    return -1;  // Ưu tiên trẻ em
                 } else if (!isChildA && isChildB) {
-                    return 1;
+                    return 1;   // Ưu tiên người không phải trẻ em xuống dưới
                 } else {
-                    return idCCCD_A.localeCompare(idCCCD_B);
+                    return idCCCD_A.localeCompare(idCCCD_B);  // Sắp xếp theo ID_CCCD nếu mọi thứ khác giống nhau
                 }
             });
 
             for (const [key, value] of sortedData) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
+                    <td>${value.STT || 'N/A'}</td>
                     <td>${value.Name || 'N/A'}</td>
                     <td>${value.ID_CCCD || 'N/A'}</td>
                     <td>${value.Address || 'N/A'}</td>
