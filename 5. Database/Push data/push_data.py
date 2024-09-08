@@ -3,53 +3,64 @@ from firebase_admin import credentials, db
 import json
 import os
 
-Temp = 80
-Heart= 80
-
 # Khởi tạo Firebase
 cred = credentials.Certificate('medical-examiner.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://medical-examiner-40e4d-default-rtdb.asia-southeast1.firebasedatabase.app/'
 })
 
-# Đường dẫn tới file lưu trữ dữ liệu người dùng
+# Tải dữ liệu người dùng từ file (nếu cần)
 user_data_file = 'fetched_users.json'
-
-# Đường dẫn tới file để chỉ định user_id cụ thể
-specific_user_id_file = 'user.json'
-
-# Tải dữ liệu người dùng từ file
 if os.path.exists(user_data_file):
     with open(user_data_file, 'r') as file:
         user_data = json.load(file)
 else:
     user_data = []
 
-# Tải user_id cụ thể từ file
-if os.path.exists(specific_user_id_file):
-    with open(specific_user_id_file, 'r') as file:
-        specific_user_id = json.load(file).get('user_id')
-else:
-    specific_user_id = None
+# Hàm đọc user_id từ file .txt
+def read_user_id_from_txt(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            content = file.read()
 
-# Hàm đẩy dữ liệu Temp và Heart cố định lên Firebase
-def push_temp_and_heart_to_firebase(user_id):
-    ref = db.reference(f'user/{user_id}')
-    ref.update({
-        'Temp': Temp,
-        'Heart': Heart
-    })
-    print(f"Đã cập nhật dữ liệu cố định cho User ID: {user_id}")
+        # Tách chuỗi và gán các biến từ file
+        lines = [line.split(": ")[1] for line in content.splitlines()]
+        id_ = lines[0]  # user_id là dòng đầu tiên
+        return id_
+    except FileNotFoundError:
+        print(f"Không tìm thấy file: {file_path}")
+        return None
+    except Exception as e:
+        print(f"Có lỗi xảy ra khi đọc file: {str(e)}")
+        return None
 
-# Đẩy dữ liệu cho một user cụ thể
-def push_data():
-    if specific_user_id:
-        if specific_user_id in user_data:
-            push_temp_and_heart_to_firebase(specific_user_id)
+# Hàm đẩy dữ liệu Temp, Heart, và STT lên Firebase
+def push_data(user_folder, Temp, Heart, STT):
+    # Đường dẫn tới file txt chứa thông tin user (thay thế đường dẫn đúng)
+    file_path = f"img/{user_folder}/data/{user_folder}.txt"
+
+    # Lấy user_id từ file .txt
+    user_id = read_user_id_from_txt(file_path)
+
+    if user_id:
+        if user_id in user_data:
+            # Đẩy dữ liệu lên Firebase
+            ref = db.reference(f'user/{user_id}')
+            ref.update({
+                'Temp': Temp,
+                'Heart': Heart,
+                'STT': STT  # Số thứ tự
+            })
+            print(f"Đã cập nhật dữ liệu cho User ID: {user_id}")
         else:
-            print(f"User ID {specific_user_id} không có trong dữ liệu.")
+            print(f"User ID {user_id} không có trong dữ liệu.")
     else:
-        print("Không có user_id cụ thể được chỉ định.")
+        print("Không thể lấy user_id từ file.")
 
+# Ví dụ sử dụng
 if __name__ == "__main__":
-    push_data()
+    user_folder = ""  # Thay bằng thư mục người dùng thực tế
+    Temp = 80
+    Heart = 75
+    STT = 1  # Số thứ tự ví dụ
+    push_data(user_folder, Temp, Heart, STT)
