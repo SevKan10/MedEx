@@ -4,18 +4,23 @@ from gtts import gTTS
 import os
 import time
 from unidecode import unidecode  
+from datetime import date, datetime
+import pytz
 
 # --------------------------------------- Khai báo thư viện
 recognizer = sr.Recognizer()
 mic = sr.Microphone()
 pygame.mixer.init()
 
+today = date.today()
+now = datetime.now()
+tz_VN = pytz.timezone('Asia/Ho_Chi_Minh')
 ###############################################################################
 flag = 1  # Biến kiểm tra nhận diện khuôn mặt                                 #
 user_name = "Khưu Triều Minh Khang"  # Thông tin khách hàng (tên có dấu)      #
 user_folder = unidecode(user_name)                                            #
                                 #biến test                                    #
-                                # hàm gán module main(user_folder, flag)      #
+                                # main(unidecode(user_name), 1)               #
 ###############################################################################
 
 def robotListen():
@@ -93,6 +98,10 @@ def ask_questions():
             robotSpeak(response)
         elif "khoa ngoại" in user_input:
             response = "Khoa ngoại nằm ở lối đi bên trái dãy 1"
+            robotSpeak(response)
+        elif "hôm nay" in user_input or "mấy giờ":
+            datetime_VN = datetime.now(tz_VN)
+            response = datetime_VN.strftime("%m/%d/%Y, %H:%M:%S")
             robotSpeak(response)
         elif user_input == "":
             response = "Tôi không nghe rõ, bạn có thể nói lại không?"
