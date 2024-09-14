@@ -14,7 +14,7 @@ arduino = serial.Serial(ARDUINO_PORT, BAUD_RATE, timeout=1)
 time.sleep(2)  # Đợi Arduino khởi động
 
 # Hàm gửi tín hiệu điều khiển đến Arduino
-def send_to_arduino(command):
+def lidarSend(command):
     arduino.write(f"{command}\n".encode())
     print(f"Sent to Arduino: {command}")
 
@@ -37,30 +37,26 @@ def process_data(data):
     # Kiểm tra và điều khiển động cơ
     if left_distance is not None and left_distance < MIN_DISTANCE:
         # Rẽ phải
-        print("Turning right")
-        send_to_arduino("R,200,200")
+        lidarSend("R,200,200")
     elif right_distance is not None and right_distance < MIN_DISTANCE:
         # Rẽ trái
-        print("Turning left")
-        send_to_arduino("L,200,200")
+        lidarSend("L,200,200")
     elif left_distance is not None and right_distance is not None and left_distance < MIN_DISTANCE and right_distance < MIN_DISTANCE:
         # Cả hai bên có vật cản, đi thẳng
-        print("Obstacle on both sides, going straight")
-        send_to_arduino("S,200,200")
+        lidarSend("S,200,200")
     else:
         # Đi thẳng
-        print("Going straight")
-        send_to_arduino("S,200,200")
+        lidarSend("S,200,200")
 
 # Chương trình chính
 if __name__ == '__main__':
     try:
-        print('Starting RPLidar')
+        print('Đang bắt đầu...')
         for scan in lidar.iter_scans():
             process_data(scan)
             time.sleep(0.1)
     except KeyboardInterrupt:
-        print('Stopping RPLidar and disconnecting Arduino')
+        print('Đang dừng...')
         lidar.stop()
         lidar.disconnect()
         arduino.close()
