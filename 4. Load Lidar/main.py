@@ -23,7 +23,7 @@ def control_robot(angle, distance):
     
     if distance < 500 and not moving:  # Kiểm tra khoảng cách và trạng thái di chuyển
         # Determine movement direction based on angle
-        if 60 <= angle <= 110:
+        if angle <= 330 or angle >= 270:
             command = 'R,40,40,'  # Turn right
             moving = True
             
