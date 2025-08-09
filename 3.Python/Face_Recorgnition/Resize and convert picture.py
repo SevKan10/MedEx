@@ -7,7 +7,7 @@ path = "Python\Face_Recorgnition\Pic\\"
 Img_List = os.listdir(path)
 
 index_pic = 0
-Name = "Phuc"
+Name = "Khang"
 img = cv2.imread(f"{path}{Img_List[index_pic]}")
 
 # Lấy ảnh gán vào Face recognition
